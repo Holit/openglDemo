@@ -1,6 +1,6 @@
-﻿  glad.c
-  main.cpp
+﻿  main.cpp
 C:\Program Files (x86)\Windows Kits\10\Include\10.0.22000.0\shared\minwindef.h(130,1): warning C4005: “APIENTRY”: 宏重定义
 D:\Projects\ComputerGraphics\openglDemo\Dependencies\glad\include\glad\glad.h(32,1): message : 参见“APIENTRY”的前一个定义
+D:\Projects\ComputerGraphics\openglDemo\src\main.cpp(62,28): warning C4101: “EBO”: 未引用的局部变量
 LINK : warning LNK4098: 默认库“MSVCRT”与其他库的使用冲突；请使用 /NODEFAULTLIB:library
   openglDemo.vcxproj -> D:\Projects\ComputerGraphics\openglDemo\x64\Debug\openglDemo.exe
