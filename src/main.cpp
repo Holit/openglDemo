@@ -1,108 +1,346 @@
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include <Windows.h>
+#include <glm/glm.hpp>
+#include <glm/matrix.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 #include <iostream>
+float vertices[] = {
+	// 位置坐标       // 法线向量
+	// 前面
+	-0.5f, -0.5f, 0.5f,  0.0f, 0.0f, 1.0f,  // 左下角顶点
+	0.5f, -0.5f, 0.5f,   0.0f, 0.0f, 1.0f,  // 右下角顶点
+	0.5f, 0.5f, 0.5f,    0.0f, 0.0f, 1.0f,  // 右上角顶点
 
-void framebuffer_size_callback(GLFWwindow* window, int width, int height);
-void processInput(GLFWwindow* window);
+	-0.5f, -0.5f, 0.5f,  0.0f, 0.0f, 1.0f,  // 左下角顶点
+	-0.5f, 0.5f, 0.5f,   0.0f, 0.0f, 1.0f,  // 左上角顶点
+	0.5f, 0.5f, 0.5f,    0.0f, 0.0f, 1.0f,  // 右上角顶点
 
-// settings
-const unsigned int SCR_WIDTH = 800;
-const unsigned int SCR_HEIGHT = 600;
+	// 背面
+	-0.5f, -0.5f, -0.5f,  0.0f, 0.0f, -1.0f,  // 左下角顶点
+	0.5f, -0.5f, -0.5f,   0.0f, 0.0f, -1.0f,  // 右下角顶点
+	0.5f, 0.5f, -0.5f,    0.0f, 0.0f, -1.0f,  // 右上角顶点
 
-int
-#if !defined(_MAC)
-#if defined(_M_CEE_PURE)
-__clrcall
-#else
-WINAPI
-#endif
-#else
-CALLBACK
-#endif
-WinMain(
-    _In_ HINSTANCE hInstance,
-    _In_opt_ HINSTANCE hPrevInstance,
-    _In_ LPSTR lpCmdLine,
-    _In_ int nShowCmd
-)
+	-0.5f, -0.5f, -0.5f,  0.0f, 0.0f, -1.0f,  // 左下角顶点
+	-0.5f, 0.5f, -0.5f,   0.0f, 0.0f, -1.0f,  // 左上角顶点
+	0.5f, 0.5f, -0.5f,    0.0f, 0.0f, -1.0f,  // 右上角顶点
+
+	// 左侧面
+	-0.5f, -0.5f, -0.5f,  -1.0f, 0.0f, 0.0f,  // 左下角顶点
+	-0.5f, -0.5f, 0.5f,   -1.0f, 0.0f, 0.0f,  // 右下角顶点
+	-0.5f, 0.5f, 0.5f,    -1.0f, 0.0f, 0.0f,  // 右上角顶点
+
+	-0.5f, -0.5f, -0.5f,  -1.0f, 0.0f, 0.0f,  // 左下角顶点
+	-0.5f, 0.5f, -0.5f,   -1.0f, 0.0f, 0.0f,  // 左上角顶点
+	-0.5f, 0.5f, 0.5f,    -1.0f, 0.0f, 0.0f,  // 右上角顶点
+
+	// 右侧面
+	0.5f, -0.5f, -0.5f,   1.0f, 0.0f, 0.0f,  // 左下角顶点
+	0.5f, -0.5f, 0.5f,    1.0f, 0.0f, 0.0f,  // 右下角顶点
+	0.5f, 0.5f, 0.5f,     1.0f, 0.0f, 0.0f,  // 右上角顶点
+
+	0.5f, -0.5f, -0.5f,   1.0f, 0.0f, 0.0f,  // 左下角顶点
+	0.5f, 0.5f, -0.5f,    1.0f, 0.0f, 0.0f,  // 左上角顶点
+	0.5f, 0.5f, 0.5f,     1.0f, 0.0f, 0.0f,  // 右上角顶点
+
+	// 顶部面
+	-0.5f, 0.5f, 0.5f,    0.0f, 1.0f, 0.0f,  // 左下角顶点
+	0.5f, 0.5f, 0.5f,     0.0f, 1.0f, 0.0f,  // 右下角顶点
+	0.5f, 0.5f, -0.5f,    0.0f, 1.0f, 0.0f,  // 右上角顶点
+
+	-0.5f, 0.5f, 0.5f,    0.0f, 1.0f, 0.0f,  // 左下角顶点
+	-0.5f, 0.5f, -0.5f,   0.0f, 1.0f, 0.0f,  // 左上角顶点
+	0.5f, 0.5f, -0.5f,    0.0f, 1.0f, 0.0f,  // 右上角顶点
+
+	// 底部面
+	-0.5f, -0.5f, 0.5f,   0.0f, -1.0f, 0.0f,  // 左下角顶点
+	0.5f, -0.5f, 0.5f,    0.0f, -1.0f, 0.0f,  // 右下角顶点
+	0.5f, -0.5f, -0.5f,   0.0f, -1.0f, 0.0f,  // 右上角顶点
+	-0.5f, -0.5f, 0.5f,   0.0f, -1.0f, 0.0f,  // 左下角顶点
+	-0.5f, -0.5f, -0.5f,  0.0f, -1.0f, 0.0f,   // 左上角顶点
+	0.5f, -0.5f, 0.5f,    0.0f, -1.0f, 0.0f,  // 右下角顶点
+};
+
+unsigned int VAO, VBO;
+
+// 顶点着色器源码
+const char* vertexShaderSource = R"(
+    #version 330 core
+    layout (location = 0) in vec3 aPos;
+    layout (location = 1) in vec3 aNormal;
+
+    out vec3 FragPos;
+    out vec3 Normal;
+
+    uniform mat4 model;
+    uniform mat4 view;
+    uniform mat4 projection;
+
+    void main()
+    {
+        FragPos = vec3(model * vec4(aPos, 1.0));
+        Normal = mat3(transpose(inverse(model))) * aNormal;
+        gl_Position = projection * view * vec4(FragPos, 1.0);
+    }
+)";
+
+// 片段着色器源码
+const char* fragmentShaderSource = R"(
+    #version 330 core
+    out vec4 FragColor;
+
+    in vec3 FragPos;
+    in vec3 Normal;
+
+    uniform vec3 lightColor;
+    uniform vec3 lightPos;
+    uniform vec3 objectColor;
+
+    void main()
+    {
+        vec3 lightDir = normalize(lightPos - FragPos);
+        float diff = max(dot(Normal, lightDir),0.15);
+        vec3 diffuse = diff * lightColor * objectColor;
+
+        FragColor = vec4(diffuse, 1.0);
+    }
+)";
+// 窗口大小
+const GLuint WIDTH = 1024, HEIGHT = 768;
+
+// 初始视角
+glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);
+glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);
+glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);
+glm::vec3 cameraRight = glm::vec3(1.0f, 0.0f, 0.0f);
+
+// 鼠标相关变量
+GLfloat yaw = -90.0f;
+GLfloat pitch = 0.0f;
+GLfloat lastX = WIDTH / 2.0f;
+GLfloat lastY = HEIGHT / 2.0f;
+bool firstMouse = true;
+
+// 键盘相关变量
+GLfloat deltaTime = 0.0f;
+GLfloat lastFrame = 0.0f;
+
+// 鼠标移动回调函数
+void mouseCallback(GLFWwindow* window, double xPos, double yPos)
 {
-    glfwInit();
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-#ifdef __APPLE__    //compatibility for MACOS
-    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-#endif
+	if (firstMouse)
+	{
+		lastX = xPos;
+		lastY = yPos;
+		firstMouse = false;
+	}
 
-    GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "LearnOpenGL", NULL, NULL);
-    if (window == NULL)
-    {
-        std::cout << "Failed to create GLFW window" << std::endl;
-        glfwTerminate();
-        return -1;
-    }
-    glfwMakeContextCurrent(window);
-    glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
+	GLfloat xOffset = xPos - lastX;
+	GLfloat yOffset = lastY - yPos;
+	lastX = xPos;
+	lastY = yPos;
 
-    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-    {
-        std::cout << "Failed to initialize GLAD" << std::endl;
-        return -1;
-    }
-    unsigned int dimension = 2;
-    //defination of a triangle
-    float vertices[] = {        
-        -0.5f, 0.5f,
-        -0.5f, -0.5f,
-        0.5f, -0.5f,
-        0.5f, 0.5f
-    };
+	GLfloat sensitivity = 0.05f;
+	xOffset *= sensitivity;
+	yOffset *= sensitivity;
 
-    unsigned int VBO, VAO, EBO;
+	yaw += xOffset;
+	pitch += yOffset;
 
-    unsigned int vertex_num = sizeof(vertices) / (dimension * sizeof(float));
+	if (pitch > 89.0f)
+		pitch = 89.0f;
+	if (pitch < -89.0f)
+		pitch = -89.0f;
 
-    glGenVertexArrays(1, &VAO);
-    glGenBuffers(1, &VBO);
-    //glGenBuffers(1, &EBO);
-
-    glBindBuffer(GL_ARRAY_BUFFER, VAO);
-    glBindVertexArray(VAO);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW); 
-
-    glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, dimension, GL_FLOAT, GL_FALSE, dimension * sizeof(float), (void*)0);
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    /*Loop until user close the window*/
-    while (!glfwWindowShouldClose(window))
-    {
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        //glBindVertexArray(VAO);
-        glDrawArrays(GL_TRIANGLES, 0, vertex_num);
-        processInput(window);
-
-        glfwSwapBuffers(window);
-        glfwPollEvents();
-    }
-    glDeleteVertexArrays(1, &VAO);
-    glDeleteBuffers(1, &VBO);
-    //glDeleteProgram(shaderProgram);
-
-    glfwDestroyWindow(window);
-    glfwTerminate();
-    return 0;
+	glm::vec3 front;
+	front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
+	front.y = sin(glm::radians(pitch));
+	front.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
+	cameraFront = glm::normalize(front);
 }
 
-void processInput(GLFWwindow* window)
+// 键盘输入回调函数
+void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, true);
+	if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+		glfwSetWindowShouldClose(window, GL_TRUE);
+
+	GLfloat cameraSpeed = 125.0f * deltaTime;
+	if (key == GLFW_KEY_W)
+		cameraPos += cameraSpeed * cameraFront;
+	if (key == GLFW_KEY_S)
+		cameraPos -= cameraSpeed * cameraFront;
+	if (key == GLFW_KEY_A)
+		cameraPos -= cameraSpeed * glm::normalize(glm::cross(cameraFront, cameraUp));
+	if (key == GLFW_KEY_D)
+		cameraPos += cameraSpeed * glm::normalize(glm::cross(cameraFront, cameraUp));
 }
 
-void framebuffer_size_callback(GLFWwindow* window, int width, int height)
+
+// 编译着色器
+unsigned int compileShader(unsigned int type, const char* source)
 {
-    // make sure the viewport matches the new window dimensions; note that width and 
-    // height will be significantly larger than specified on retina displays.
-    glViewport(0, 0, width, height);
+	unsigned int shader = glCreateShader(type);
+	glShaderSource(shader, 1, &source, nullptr);
+	glCompileShader(shader);
+
+	// 检查编译错误
+	int success;
+	glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
+	if (!success)
+	{
+		char infoLog[512];
+		glGetShaderInfoLog(shader, 512, nullptr, infoLog);
+		std::cout << "Shader compilation failed:\n" << infoLog << std::endl;
+	}
+
+	return shader;
+}
+
+// 创建着色器程序
+unsigned int createShaderProgram()
+{
+	unsigned int vertexShader = compileShader(GL_VERTEX_SHADER, vertexShaderSource);
+	unsigned int fragmentShader = compileShader(GL_FRAGMENT_SHADER, fragmentShaderSource);
+
+	unsigned int shaderProgram = glCreateProgram();
+	glAttachShader(shaderProgram, vertexShader);
+	glAttachShader(shaderProgram, fragmentShader);
+	glLinkProgram(shaderProgram);
+
+	// 检查链接错误
+	int success;
+	glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
+	if (!success)
+	{
+		char infoLog[512];
+		glGetProgramInfoLog(shaderProgram, 512, nullptr, infoLog);
+		std::cout << "Shader program linking failed:\n" << infoLog << std::endl;
+	}
+
+	glDeleteShader(vertexShader);
+	glDeleteShader(fragmentShader);
+
+	return shaderProgram;
+}
+
+int main()
+{
+	// 初始化 GLFW
+	glfwInit();
+
+	// 创建窗口
+	GLFWwindow* window = glfwCreateWindow(WIDTH, HEIGHT, "Flat Shading Cube", nullptr, nullptr);
+	if (window == nullptr)
+	{
+		glfwTerminate();
+		return -1;
+	}
+
+	// 将窗口设置为当前上下文
+	glfwMakeContextCurrent(window);
+
+	// 初始化 GLAD
+	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+	{
+		std::cout << "Failed to initialize GLAD" << std::endl;
+		return -1;
+	}
+
+	// 创建 VAO 和 VBO
+	glGenVertexArrays(1, &VAO);
+	glGenBuffers(1, &VBO);
+
+	// 绑定 VAO
+	glBindVertexArray(VAO);
+
+	// 绑定 VBO 并设置顶点数据
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+	// 设置顶点属性指针
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+	glEnableVertexAttribArray(1);
+
+	// 解绑 VAO 和 VBO
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindVertexArray(0);
+
+	// 创建着色器程序
+	unsigned int shaderProgram = createShaderProgram();
+	// 注册回调函数
+	glfwSetCursorPosCallback(window, mouseCallback);
+	glfwSetKeyCallback(window, keyCallback);
+
+	// 隐藏并捕捉鼠标
+	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+	// 主循环
+	while (!glfwWindowShouldClose(window))
+	{
+		GLfloat currentFrame = glfwGetTime();
+		deltaTime = currentFrame - lastFrame;
+		lastFrame = currentFrame;
+		glEnable(GL_DEPTH_TEST);
+		// 清空颜色缓冲和深度缓冲
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+		// 使用着色器程序
+		glUseProgram(shaderProgram);
+
+		// 设置着色器中的 uniform 变量
+		int objectColorLoc = glGetUniformLocation(shaderProgram, "objectColor");
+		int lightColorLoc = glGetUniformLocation(shaderProgram, "lightColor");
+		int lightPosLoc = glGetUniformLocation(shaderProgram, "lightPos");
+		int modelLoc = glGetUniformLocation(shaderProgram, "model");
+		int viewLoc = glGetUniformLocation(shaderProgram, "view");
+		int projectionLoc = glGetUniformLocation(shaderProgram, "projection");
+
+		glUniform3f(objectColorLoc, 1.0f, 0.5f, 0.3f);
+		glUniform3f(lightColorLoc, 1.0f, 1.0f, 1.0f);
+		glUniform3f(lightPosLoc, 1.0f, 1.0f, 1.0f);
+
+		// 计算投影矩阵
+		int width, height;
+		glfwGetFramebufferSize(window, &width, &height);
+		float aspectRatio = static_cast<float>(width) / height;
+		glm::mat4 projection = glm::perspective(glm::radians(45.0f), aspectRatio, 0.1f, 100.0f);
+		glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, glm::value_ptr(projection));
+
+		glfwPollEvents();
+		glm::mat4 view;
+		// 更新相机矩阵
+		view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+		// 计算视图矩阵
+		//view = glm::lookAt(glm::vec3(3.0f, 3.0f, 3.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+		glUniformMatrix4fv(viewLoc, 1, GL_FALSE, glm::value_ptr(view));
+
+		// 计算模型矩阵
+		glm::mat4 model = glm::mat4(1.0f);
+		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
+
+		// 绑定 VAO
+		glBindVertexArray(VAO);
+
+		// 绘制正方体
+		glDrawArrays(GL_TRIANGLES, 0, 36);
+
+		// 解绑 VAO
+		glBindVertexArray(0);
+
+		// 交换缓冲并检查事件
+		glfwSwapBuffers(window);
+
+	}
+
+	// 清理资源
+	glDeleteVertexArrays(1, &VAO);
+	glDeleteBuffers(1, &VBO);
+	glDeleteProgram(shaderProgram);
+
+	// 终止 GLFW
+	glfwTerminate();
+
+	return 0;
 }
