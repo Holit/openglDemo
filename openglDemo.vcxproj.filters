@@ -47,6 +47,9 @@
     <None Include="src\generate_vetx_norm.py">
       <Filter>源文件</Filter>
     </None>
+    <None Include="README.md">
+      <Filter>源文件</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Dependencies\imgui\backends\imgui_impl_glfw.h">
