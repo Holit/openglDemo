@@ -52,3 +52,4 @@ Mkfile.old
 dkms.conf
 /.vs
 /x64/Debug/openglDemo.tlog
+/x64/Release
