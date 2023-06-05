@@ -8,6 +8,11 @@
 
 这是一个计算机图形学的实验项目，主要目的是完成作业和学习OpenGL在Windows上的图形编程策略，学习现代图形学概念和实践。
 
+## 最终效果
+
+![animation](https://github.com/Holit/openglDemo/assets/20926583/6e5d9852-92a5-481f-bb24-ac3f2ff93170)
+
+
 ## 开发环境和调试环境
 
 Visual Studio 2022 (v143)
