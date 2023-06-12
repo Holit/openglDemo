@@ -16,8 +16,61 @@ extern "C" {
 }
 constexpr float PI = 3.1415926535897f;
 #pragma region 顶点数据
+//正方体顶点
+float cubeVertices[] ={
+
+	// 位置坐标       // 法线向量
+	// 前面
+	-0.5f, -0.5f, 0.5f,  0.0f, 0.0f, 1.0f,  // 左下角顶点
+	0.5f, -0.5f, 0.5f,   0.0f, 0.0f, 1.0f,  // 右下角顶点
+	0.5f, 0.5f, 0.5f,    0.0f, 0.0f, 1.0f,  // 右上角顶点
+	-0.5f, -0.5f, 0.5f,  0.0f, 0.0f, 1.0f,  // 左下角顶点
+	-0.5f, 0.5f, 0.5f,   0.0f, 0.0f, 1.0f,  // 左上角顶点
+	0.5f, 0.5f, 0.5f,    0.0f, 0.0f, 1.0f,  // 右上角顶点
+
+	// 背面
+	-0.5f, -0.5f, -0.5f,  0.0f, 0.0f, -1.0f,  // 左下角顶点
+	0.5f, -0.5f, -0.5f,   0.0f, 0.0f, -1.0f,  // 右下角顶点
+	0.5f, 0.5f, -0.5f,    0.0f, 0.0f, -1.0f,  // 右上角顶点
+	-0.5f, -0.5f, -0.5f,  0.0f, 0.0f, -1.0f,  // 左下角顶点
+	-0.5f, 0.5f, -0.5f,   0.0f, 0.0f, -1.0f,  // 左上角顶点
+	0.5f, 0.5f, -0.5f,    0.0f, 0.0f, -1.0f,  // 右上角顶点
+
+	// 左侧面
+	-0.5f, -0.5f, -0.5f,  -1.0f, 0.0f, 0.0f,  // 左下角顶点
+	-0.5f, -0.5f, 0.5f,   -1.0f, 0.0f, 0.0f,  // 右下角顶点
+	-0.5f, 0.5f, 0.5f,    -1.0f, 0.0f, 0.0f,  // 右上角顶点
+	-0.5f, -0.5f, -0.5f,  -1.0f, 0.0f, 0.0f,  // 左下角顶点
+	-0.5f, 0.5f, -0.5f,   -1.0f, 0.0f, 0.0f,  // 左上角顶点
+	-0.5f, 0.5f, 0.5f,    -1.0f, 0.0f, 0.0f,  // 右上角顶点
+
+	// 右侧面
+	0.5f, -0.5f, -0.5f,   1.0f, 0.0f, 0.0f,  // 左下角顶点
+	0.5f, -0.5f, 0.5f,    1.0f, 0.0f, 0.0f,  // 右下角顶点
+	0.5f, 0.5f, 0.5f,     1.0f, 0.0f, 0.0f,  // 右上角顶点
+	0.5f, -0.5f, -0.5f,   1.0f, 0.0f, 0.0f,  // 左下角顶点
+	0.5f, 0.5f, -0.5f,    1.0f, 0.0f, 0.0f,  // 左上角顶点
+	0.5f, 0.5f, 0.5f,     1.0f, 0.0f, 0.0f,  // 右上角顶点
+
+	// 顶部面
+	-0.5f, 0.5f, 0.5f,    0.0f, 1.0f, 0.0f,  // 左下角顶点
+	0.5f, 0.5f, 0.5f,     0.0f, 1.0f, 0.0f,  // 右下角顶点
+	0.5f, 0.5f, -0.5f,    0.0f, 1.0f, 0.0f,  // 右上角顶点
+	-0.5f, 0.5f, 0.5f,    0.0f, 1.0f, 0.0f,  // 左下角顶点
+	-0.5f, 0.5f, -0.5f,   0.0f, 1.0f, 0.0f,  // 左上角顶点
+	0.5f, 0.5f, -0.5f,    0.0f, 1.0f, 0.0f,  // 右上角顶点
+
+	// 底部面
+	-0.5f, -0.5f, 0.5f,   0.0f, -1.0f, 0.0f,  // 左下角顶点
+	0.5f, -0.5f, 0.5f,    0.0f, -1.0f, 0.0f,  // 右下角顶点
+	0.5f, -0.5f, -0.5f,   0.0f, -1.0f, 0.0f,  // 右上角顶点
+	-0.5f, -0.5f, 0.5f,   0.0f, -1.0f, 0.0f,  // 左下角顶点
+	-0.5f, -0.5f, -0.5f,  0.0f, -1.0f, 0.0f,   // 左上角顶点
+	0.5f, -0.5f, 0.5f,    0.0f, -1.0f, 0.0f,  // 右下角顶点
+
+};
 //正十二面体的顶点
-float vertices[] = {
+float dodecahedronVertices[] = {
 		-0.93f, 0.00f, -0.36f,  -0.41, -0.25f, -0.00f,
 		-0.58f, -0.58f, -0.58f, -0.41, -0.25f, -0.00f,
 		-0.36f, -0.93f, 0.00f,  -0.41, -0.25f, -0.00f,
@@ -126,60 +179,6 @@ float vertices[] = {
 		-0.93f, 0.00f, -0.36f,  -0.25, 0.00f, -0.41f,
 		0.00f, -0.36f, -0.93f,  -0.25, 0.00f, -0.41f,
 		-0.58f, -0.58f, -0.58f, -0.25, 0.00f, -0.41f,
-
-	// 位置坐标       // 法线向量
-	// 前面
-	-0.5f, -0.5f, 0.5f,  0.0f, 0.0f, 1.0f,  // 左下角顶点
-	0.5f, -0.5f, 0.5f,   0.0f, 0.0f, 1.0f,  // 右下角顶点
-	0.5f, 0.5f, 0.5f,    0.0f, 0.0f, 1.0f,  // 右上角顶点
-
-	-0.5f, -0.5f, 0.5f,  0.0f, 0.0f, 1.0f,  // 左下角顶点
-	-0.5f, 0.5f, 0.5f,   0.0f, 0.0f, 1.0f,  // 左上角顶点
-	0.5f, 0.5f, 0.5f,    0.0f, 0.0f, 1.0f,  // 右上角顶点
-
-	// 背面
-	-0.5f, -0.5f, -0.5f,  0.0f, 0.0f, -1.0f,  // 左下角顶点
-	0.5f, -0.5f, -0.5f,   0.0f, 0.0f, -1.0f,  // 右下角顶点
-	0.5f, 0.5f, -0.5f,    0.0f, 0.0f, -1.0f,  // 右上角顶点
-
-	-0.5f, -0.5f, -0.5f,  0.0f, 0.0f, -1.0f,  // 左下角顶点
-	-0.5f, 0.5f, -0.5f,   0.0f, 0.0f, -1.0f,  // 左上角顶点
-	0.5f, 0.5f, -0.5f,    0.0f, 0.0f, -1.0f,  // 右上角顶点
-
-	// 左侧面
-	-0.5f, -0.5f, -0.5f,  -1.0f, 0.0f, 0.0f,  // 左下角顶点
-	-0.5f, -0.5f, 0.5f,   -1.0f, 0.0f, 0.0f,  // 右下角顶点
-	-0.5f, 0.5f, 0.5f,    -1.0f, 0.0f, 0.0f,  // 右上角顶点
-
-	-0.5f, -0.5f, -0.5f,  -1.0f, 0.0f, 0.0f,  // 左下角顶点
-	-0.5f, 0.5f, -0.5f,   -1.0f, 0.0f, 0.0f,  // 左上角顶点
-	-0.5f, 0.5f, 0.5f,    -1.0f, 0.0f, 0.0f,  // 右上角顶点
-
-	// 右侧面
-	0.5f, -0.5f, -0.5f,   1.0f, 0.0f, 0.0f,  // 左下角顶点
-	0.5f, -0.5f, 0.5f,    1.0f, 0.0f, 0.0f,  // 右下角顶点
-	0.5f, 0.5f, 0.5f,     1.0f, 0.0f, 0.0f,  // 右上角顶点
-
-	0.5f, -0.5f, -0.5f,   1.0f, 0.0f, 0.0f,  // 左下角顶点
-	0.5f, 0.5f, -0.5f,    1.0f, 0.0f, 0.0f,  // 左上角顶点
-	0.5f, 0.5f, 0.5f,     1.0f, 0.0f, 0.0f,  // 右上角顶点
-
-	// 顶部面
-	-0.5f, 0.5f, 0.5f,    0.0f, 1.0f, 0.0f,  // 左下角顶点
-	0.5f, 0.5f, 0.5f,     0.0f, 1.0f, 0.0f,  // 右下角顶点
-	0.5f, 0.5f, -0.5f,    0.0f, 1.0f, 0.0f,  // 右上角顶点
-
-	-0.5f, 0.5f, 0.5f,    0.0f, 1.0f, 0.0f,  // 左下角顶点
-	-0.5f, 0.5f, -0.5f,   0.0f, 1.0f, 0.0f,  // 左上角顶点
-	0.5f, 0.5f, -0.5f,    0.0f, 1.0f, 0.0f,  // 右上角顶点
-
-	// 底部面
-	-0.5f, -0.5f, 0.5f,   0.0f, -1.0f, 0.0f,  // 左下角顶点
-	0.5f, -0.5f, 0.5f,    0.0f, -1.0f, 0.0f,  // 右下角顶点
-	0.5f, -0.5f, -0.5f,   0.0f, -1.0f, 0.0f,  // 右上角顶点
-	-0.5f, -0.5f, 0.5f,   0.0f, -1.0f, 0.0f,  // 左下角顶点
-	-0.5f, -0.5f, -0.5f,  0.0f, -1.0f, 0.0f,   // 左上角顶点
-	0.5f, -0.5f, 0.5f,    0.0f, -1.0f, 0.0f,  // 右下角顶点
 };
 //球体顶点
 std::vector<float> sphereVertices;
@@ -198,9 +197,9 @@ void calculateSphereData()
 		{
 			float xSegment = (float)x / (float)X_SEGMENTS;
 			float ySegment = (float)y / (float)Y_SEGMENTS;
-			float xPos = std::cos(xSegment * 2.0f * PI) * std::sin(ySegment * PI);
-			float yPos = std::cos(ySegment * PI);
-			float zPos = std::sin(xSegment * 2.0f * PI) * std::sin(ySegment * PI);
+			float xPos = std::cos(xSegment * 2.0f * PI) * std::sin(ySegment * 1.0f * PI);
+			float yPos = std::cos(ySegment * 1.0f * PI);
+			float zPos = std::sin(xSegment * 2.0f * PI) * std::sin(ySegment * 1.0f * PI);
 			sphereVertices.push_back(xPos);
 			sphereVertices.push_back(yPos);
 			sphereVertices.push_back(zPos);
@@ -219,6 +218,8 @@ void calculateSphereData()
 			sphereIndices.push_back(i * (X_SEGMENTS + 1) + j);
 			sphereIndices.push_back((i + 1) * (X_SEGMENTS + 1) + j + 1);
 			sphereIndices.push_back(i * (X_SEGMENTS + 1) + j + 1);
+
+
 			int index1 = i * (X_SEGMENTS + 1) + j;
 			int index2 = (i + 1) * (X_SEGMENTS + 1) + j;
 			int index3 = (i + 1) * (X_SEGMENTS + 1) + j + 1;
@@ -244,9 +245,15 @@ void calculateSphereData()
 }
 #pragma endregion 顶点数据
 
-unsigned int VAO, VBO;
+unsigned int VAO_dodecahedron, VBO_dodecahedron;
 unsigned int VAO_sphere, VBO_sphere,EBO_sphere;
+unsigned int VAO_cube, VBO_cube;
 #pragma region 着色器源码
+/*
+*	Flat Shading 用面法线计算像素；
+	Gouraud Shading 用顶点法线算出颜色再插值；
+	Phong Shading 用顶点法线插值后算像素颜色
+*/
 // flat、Phong顶点着色器源码
 const char* vertexShaderSourceDefault = R"(
     #version 330 core
@@ -270,7 +277,6 @@ const char* vertexShaderSourceDefault = R"(
 
 // Gouraud顶点着色器源码
 // 将顶点位置和法线转换到世界坐标系，并计算最终的裁剪空间坐标。同时，还计算了顶点到光源的方向向量。
-// Gouraud顶点着色器源码
 const char* vertexShaderSourceGouraud = R"(
     #version 330 core
     layout (location = 0) in vec3 aPos;       // 顶点位置属性
@@ -311,7 +317,7 @@ const char* fragmentShaderSourceFlat = R"(
     {
         vec3 lightDir = normalize(lightPos - FragPos);    // 计算光源方向向量，即片段到光源的方向
         float diff = max(dot(Normal, lightDir), diffLight);    // 计算漫反射光照强度
-        vec3 diffuse = diff * lightColor * objectColor;    // 计算漫反射光照的颜色
+        vec3 diffuse = diff * lightColor * objectColor ;    // 计算漫反射光照的颜色
 
         FragColor = vec4(diffuse, 1.0);    // 设置输出片段颜色
     }
@@ -350,7 +356,7 @@ const char* fragmentShaderSourcePhong = R"(
         float spec = pow(max(dot(viewDir, reflectDir), 0.0), 8.0);
         vec3 specular = spec * lightColor * mirrorReflectLight;
 
-        vec3 result = ambient + diffuse + specular;
+        vec3 result = ambient + diffuse + specular ;
         FragColor = vec4(result * objectColor, 1.0);    // 设置输出片段颜色
     }
 )";
@@ -380,14 +386,16 @@ const char* fragmentShaderSourceGouraud = R"(
 
 // 基本片元着色器，没有光照模型
 const char* fragmentShaderSourceSimple = R"(
-    #version 330 core
-    out vec4 FragColor;
 
-    uniform vec3 objectColor;
+    #version 330 core
+    out vec4 FragColor;    // 输出片段颜色
+
+    in vec3 FragPos;       // 片段位置向量
 
     void main()
     {
-        FragColor = vec4(objectColor,1.0);
+
+        FragColor = vec4(FragPos, 1.0);    // 设置输出片段颜色
     }
 )";
 #pragma endregion 着色器源码
@@ -453,6 +461,15 @@ enum SHADER_TYPE
 };
 //光照着色器选择
 int shaderType = SHADER_TYPE::Flat;
+
+enum POLY
+{
+	Dodecahedron = 0x00,
+	Dodecahedron_lines = 0x01,
+	Sphere = 0x02,
+	Sphere_lines = 0x03,
+};
+int currentPoly = POLY::Dodecahedron;
 
 // 鼠标移动回调函数
 /*
@@ -569,6 +586,10 @@ void objectMove()
 			cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * velocity;
 		if (keys[GLFW_KEY_D])
 			cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * velocity;
+		if (keys[GLFW_KEY_SPACE])
+			cameraPos.y += velocity;
+		if (keys[GLFW_KEY_LEFT_SHIFT])
+			cameraPos.y -= velocity;
 	}
 	
 }
@@ -592,6 +613,14 @@ void keyCallback(GLFWwindow* window, int key, int scancode, int action, int mode
 	if (key == GLFW_KEY_F2 && action == GLFW_PRESS)
 	{
 		isShowImGui = !isShowImGui;  // 切换ImGui的可见性状态
+	}
+	if (key == GLFW_KEY_F5 && action == GLFW_PRESS)
+	{
+		currentPoly++;
+		if (currentPoly == 0x04)
+		{
+			currentPoly = 0x00;
+		}
 	}
 	//变换不同的光照渲染方式
 	if (key == GLFW_KEY_F1 && action == GLFW_PRESS)
@@ -767,19 +796,41 @@ int main()
 	ImGui::CreateContext();
 	ImGui_ImplGlfw_InitForOpenGL(window, true);
 	ImGui_ImplOpenGL3_Init("#version 330 core");
-	
+
+	// 球体解算
 	calculateSphereData();
 
+	// 绑定正方体
 	// 创建 VAO 和 VBO
-	glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &VBO);
-	// 绑定正十二面体
+	glGenVertexArrays(1, &VAO_cube);
+	glGenBuffers(1, &VBO_cube);
 	// 绑定 VAO
-	glBindVertexArray(VAO);
+	glBindVertexArray(VAO_cube);
 
 	// 绑定 VBO 并设置顶点数据
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO_cube);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(cubeVertices), cubeVertices, GL_STATIC_DRAW);
+	 
+	// 设置顶点属性指针
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
+	glEnableVertexAttribArray(1);
+	// 解绑 VAO 和 VBO
+	glBindVertexArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+
+	// 绑定正十二面体
+	// 创建 VAO 和 VBO
+	glGenVertexArrays(1, &VAO_dodecahedron);
+	glGenBuffers(1, &VBO_dodecahedron);
+	// 绑定 VAO
+	glBindVertexArray(VAO_dodecahedron);
+
+	// 绑定 VBO 并设置顶点数据
+	glBindBuffer(GL_ARRAY_BUFFER, VBO_dodecahedron);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(dodecahedronVertices), dodecahedronVertices, GL_STATIC_DRAW);
 
 	// 设置顶点属性指针
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
@@ -787,35 +838,39 @@ int main()
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3 * sizeof(float)));
 	glEnableVertexAttribArray(1);
 	// 解绑 VAO 和 VBO
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-	// 球体解算
-	// 创建 VAO 和 VBO
+	// 绑定球体
 	glGenVertexArrays(1, &VAO_sphere);
 	glGenBuffers(1, &VBO_sphere);
-	// 绑定正十二面体
+
 	// 绑定 VAO
 	glBindVertexArray(VAO_sphere);
 
 	// 绑定 VBO 并设置顶点数据
 	glBindBuffer(GL_ARRAY_BUFFER, VBO_sphere);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * sphereVertices.size(), &sphereVertices[0], GL_STATIC_DRAW);
-
+	// 绑定面数据
 	glGenBuffers(1, &EBO_sphere);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO_sphere);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sphereIndices.size() * sizeof(int), &sphereIndices[0], GL_STATIC_DRAW);
 
 	// 设置顶点属性指针
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 
+	// 设置法线
 	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * sphereNormal.size(), &sphereNormal[0], GL_STATIC_DRAW);
 	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(0));
 	glEnableVertexAttribArray(1);
+
 	// 解绑 VAO 和 VBO
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+	//绑定正方体
+	
 	// 创建着色器程序
 	unsigned shaderProgram = 0;
 	unsigned int FlatShaderProgram = createShaderProgram(vertexShaderSourceDefault, fragmentShaderSourceFlat);
@@ -901,59 +956,113 @@ int main()
 		// 计算模型矩阵
 		glUniformMatrix4fv(modelLoc, 1, GL_FALSE, glm::value_ptr(model));
 
-		// 绑定 VAO
-		glBindVertexArray(VAO);
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		// 绘制正十二面体
+		switch (currentPoly)
+		{
+		case Sphere_lines:
 
+			//绘制球体
+			//启用深度测试
+			glEnable(GL_DEPTH_TEST);
+			//启用面剔除
+			glEnable(GL_CULL_FACE);
+			//启用多重采样抗锯齿（可选）
+			glfwWindowHint(GLFW_SAMPLES, 16);
+			glEnable(GL_MULTISAMPLE);
+
+			glBindVertexArray(VAO_sphere);
+
+			//glm::mat4 model3 = glm::mat4(1.0f);
+			//model3 = glm::translate(model3, glm::vec3(-2.0f));
+			//model3 = glm::scale(model3, glm::vec3(1.0f)); // 缩放模型
+
+			glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "model"), 1, GL_FALSE, glm::value_ptr(model));
+			glUniform3f(glGetUniformLocation(shaderProgram, "objectColor"), 0.5f, 0.7f, 0.3f);
+			glDrawElements(GL_LINE_STRIP, X_SEGMENTS * Y_SEGMENTS * 6, GL_UNSIGNED_INT, 0);
+			glBindVertexArray(0);
+			break;
+		case Sphere:
+			//绘制球体
+			//启用深度测试
+			glEnable(GL_DEPTH_TEST);
+			//启用面剔除
+			glEnable(GL_CULL_FACE);
+			//启用多重采样抗锯齿（可选）
+			glfwWindowHint(GLFW_SAMPLES, 16);
+			glEnable(GL_MULTISAMPLE);
+
+			glBindVertexArray(VAO_sphere);
+
+			//glm::mat4 model3 = glm::mat4(1.0f);
+			//model3 = glm::translate(model3, glm::vec3(-2.0f));
+			//model3 = glm::scale(model3, glm::vec3(1.0f)); // 缩放模型
+
+			glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "model"), 1, GL_FALSE, glm::value_ptr(model));
+			glUniform3f(glGetUniformLocation(shaderProgram, "objectColor"), 0.5f, 0.7f, 0.3f);
+			glDrawElements(GL_TRIANGLES, X_SEGMENTS * Y_SEGMENTS * 6, GL_UNSIGNED_INT, 0);
+			glBindVertexArray(0);
+			break;
+		case Dodecahedron_lines:
+
+			// 绑定 VAO
+			glBindVertexArray(VAO_dodecahedron);
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+			// 绘制正十二面体
+
+			//启用深度测试
+			glEnable(GL_DEPTH_TEST);
+			//启用面剔除
+			glEnable(GL_CULL_FACE);
+			//启用多重采样抗锯齿（可选）
+			glfwWindowHint(GLFW_SAMPLES, 16);
+			glEnable(GL_MULTISAMPLE);
+
+			glDrawArrays(GL_LINE_STRIP, 0, 108);
+			//glLineWidth(16.0f);
+			//glDrawArrays(GL_LINE_STRIP, 0, 108);
+
+			// 解绑 VAO
+			glBindVertexArray(0);
+			break;
+		default:
+		case Dodecahedron:
+			// 绑定 VAO
+			glBindVertexArray(VAO_dodecahedron);
+			glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+			// 绘制正十二面体
+
+			//启用深度测试
+			glEnable(GL_DEPTH_TEST);
+			//启用面剔除
+			glEnable(GL_CULL_FACE);
+			//启用多重采样抗锯齿（可选）
+			glfwWindowHint(GLFW_SAMPLES, 16);
+			glEnable(GL_MULTISAMPLE);
+
+			glDrawArrays(GL_TRIANGLES, 0, 108);
+			//glLineWidth(16.0f);
+			//glDrawArrays(GL_LINE_STRIP, 0, 108);
+
+			// 解绑 VAO
+			glBindVertexArray(0);
+			break;
+
+		}
+
+
+		// 渲染光源正方体
+		//glUseProgram(0);
 		//启用深度测试
-		glEnable(GL_DEPTH_TEST);
+		glDisable(GL_DEPTH_TEST);
 		//启用面剔除
-		glEnable(GL_CULL_FACE);
-		//启用多重采样抗锯齿（可选）
-		glfwWindowHint(GLFW_SAMPLES, 16);
-		glEnable(GL_MULTISAMPLE);
-		
-		glDrawArrays(GL_TRIANGLES, 0, 108);
-		//glLineWidth(16.0f);
-		//glDrawArrays(GL_LINE_STRIP, 0, 108);
-
-		// 解绑 VAO
-		glBindVertexArray(0);
-
-		// 渲染第二个正方体
-		//glUseProgram(SimpleShaderProgram);
+		glDisable(GL_CULL_FACE);
 		glm::mat4 model2 = glm::mat4(1.0f);
-		model2 = glm::translate(model2, lightPos); 
-		model2 = glm::scale(model2, glm::vec3(0.1f)); // 缩放模型
+		model2 = glm::translate(model2, lightPos);
+		model2 = glm::scale(model2, glm::vec3(0.06f)); // 缩放模型
 		;
 		glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "model"), 1, GL_FALSE, glm::value_ptr(model2));
-		glUniform3f(glGetUniformLocation(shaderProgram, "objectColor"), 0.1f,0.1f,0.1f);
-		glBindVertexArray(VAO);
-
-		glDrawArrays(GL_LINE_STRIP, 108, 36);
-
-		// 解绑 VAO
-		glBindVertexArray(0);
-
-		//绘制球体
-		//启用深度测试
-		glEnable(GL_DEPTH_TEST);
-		//启用面剔除
-		glEnable(GL_CULL_FACE);
-		//启用多重采样抗锯齿（可选）
-		glfwWindowHint(GLFW_SAMPLES, 16);
-		glEnable(GL_MULTISAMPLE);
-
-		glBindVertexArray(VAO_sphere);
-
-		glm::mat4 model3 = glm::mat4(1.0f);
-		model3 = glm::translate(model3, glm::vec3(-2.0f));
-		model3 = glm::scale(model3, glm::vec3(1.0f)); // 缩放模型
-
-		glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "model"), 1, GL_FALSE, glm::value_ptr(model3));
-		glUniform3f(glGetUniformLocation(shaderProgram, "objectColor"), 0.5f, 0.7f, 0.3f);
-		glDrawElements(GL_TRIANGLES, X_SEGMENTS * Y_SEGMENTS * 6, GL_UNSIGNED_INT, 0);
+		glUniform3f(glGetUniformLocation(shaderProgram, "objectColor"), 0.1f, 0.1f, 0.1f);
+		glBindVertexArray(VAO_cube);
+		glDrawArrays(GL_TRIANGLES, 0, 36);
 		glBindVertexArray(0);
 		if (isShowImGui)
 		{
@@ -967,9 +1076,20 @@ int main()
 	}
 
 	// 清理资源
-	glDeleteVertexArrays(1, &VAO);
-	glDeleteBuffers(1, &VBO);
-	glDeleteProgram(shaderProgram);
+
+	glDeleteVertexArrays(1, &VAO_cube);
+	glDeleteBuffers(1, &VBO_cube);
+
+	glDeleteVertexArrays(1, &VAO_dodecahedron);
+	glDeleteBuffers(1, &VBO_dodecahedron);
+
+	glDeleteVertexArrays(1, &VAO_sphere);
+	glDeleteBuffers(1, &VBO_sphere);
+
+	glDeleteProgram(FlatShaderProgram);
+	glDeleteProgram(PhongShaderProgram);
+	glDeleteProgram(GouraudShaderProgram);
+	glDeleteProgram(SimpleShaderProgram);
 
 	// 清理ImGui
 	ImGui_ImplOpenGL3_Shutdown();
