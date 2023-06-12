@@ -1,17 +1,17 @@
 ﻿  main.cpp
-E:\Projects\ComputerGraphics\openglDemo\src\main.cpp(182,1): warning C4305: “初始化”: 从“double”到“float”截断
-E:\Projects\ComputerGraphics\openglDemo\src\main.cpp(399,11): warning C4244: “=”: 从“double”转换到“GLfloat”，可能丢失数据
-E:\Projects\ComputerGraphics\openglDemo\src\main.cpp(400,11): warning C4244: “=”: 从“double”转换到“GLfloat”，可能丢失数据
-E:\Projects\ComputerGraphics\openglDemo\src\main.cpp(406,16): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
-E:\Projects\ComputerGraphics\openglDemo\src\main.cpp(407,16): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
-E:\Projects\ComputerGraphics\openglDemo\src\main.cpp(417,19): warning C4244: “初始化”: 从“double”转换到“GLfloat”，可能丢失数据
-E:\Projects\ComputerGraphics\openglDemo\src\main.cpp(418,19): warning C4244: “初始化”: 从“double”转换到“GLfloat”，可能丢失数据
-E:\Projects\ComputerGraphics\openglDemo\src\main.cpp(419,11): warning C4244: “=”: 从“double”转换到“GLfloat”，可能丢失数据
-E:\Projects\ComputerGraphics\openglDemo\src\main.cpp(420,11): warning C4244: “=”: 从“double”转换到“GLfloat”，可能丢失数据
-E:\Projects\ComputerGraphics\openglDemo\src\main.cpp(448,44): warning C4244: “+=”: 从“double”转换到“float”，可能丢失数据
-E:\Projects\ComputerGraphics\openglDemo\src\main.cpp(452,51): warning C4244: “+=”: 从“double”转换到“float”，可能丢失数据
-E:\Projects\ComputerGraphics\openglDemo\src\main.cpp(456,42): warning C4244: “+=”: 从“double”转换到“float”，可能丢失数据
-E:\Projects\ComputerGraphics\openglDemo\src\main.cpp(460,21): warning C4244: “-=”: 从“double”转换到“GLfloat”，可能丢失数据
-E:\Projects\ComputerGraphics\openglDemo\src\main.cpp(469,25): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
-E:\Projects\ComputerGraphics\openglDemo\src\main.cpp(743,24): warning C4244: “初始化”: 从“double”转换到“GLfloat”，可能丢失数据
+E:\Projects\ComputerGraphics\openglDemo\src\main.cpp(183,1): warning C4305: “初始化”: 从“double”到“float”截断
+E:\Projects\ComputerGraphics\openglDemo\src\main.cpp(461,11): warning C4244: “=”: 从“double”转换到“GLfloat”，可能丢失数据
+E:\Projects\ComputerGraphics\openglDemo\src\main.cpp(462,11): warning C4244: “=”: 从“double”转换到“GLfloat”，可能丢失数据
+E:\Projects\ComputerGraphics\openglDemo\src\main.cpp(468,16): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+E:\Projects\ComputerGraphics\openglDemo\src\main.cpp(469,16): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+E:\Projects\ComputerGraphics\openglDemo\src\main.cpp(479,19): warning C4244: “初始化”: 从“double”转换到“GLfloat”，可能丢失数据
+E:\Projects\ComputerGraphics\openglDemo\src\main.cpp(480,19): warning C4244: “初始化”: 从“double”转换到“GLfloat”，可能丢失数据
+E:\Projects\ComputerGraphics\openglDemo\src\main.cpp(481,11): warning C4244: “=”: 从“double”转换到“GLfloat”，可能丢失数据
+E:\Projects\ComputerGraphics\openglDemo\src\main.cpp(482,11): warning C4244: “=”: 从“double”转换到“GLfloat”，可能丢失数据
+E:\Projects\ComputerGraphics\openglDemo\src\main.cpp(510,44): warning C4244: “+=”: 从“double”转换到“float”，可能丢失数据
+E:\Projects\ComputerGraphics\openglDemo\src\main.cpp(514,51): warning C4244: “+=”: 从“double”转换到“float”，可能丢失数据
+E:\Projects\ComputerGraphics\openglDemo\src\main.cpp(518,42): warning C4244: “+=”: 从“double”转换到“float”，可能丢失数据
+E:\Projects\ComputerGraphics\openglDemo\src\main.cpp(522,21): warning C4244: “-=”: 从“double”转换到“GLfloat”，可能丢失数据
+E:\Projects\ComputerGraphics\openglDemo\src\main.cpp(531,25): warning C4244: “初始化”: 从“double”转换到“float”，可能丢失数据
+E:\Projects\ComputerGraphics\openglDemo\src\main.cpp(833,24): warning C4244: “初始化”: 从“double”转换到“GLfloat”，可能丢失数据
   openglDemo.vcxproj -> E:\Projects\ComputerGraphics\openglDemo\x64\Debug\openglDemo.exe

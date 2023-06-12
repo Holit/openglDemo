@@ -10,10 +10,11 @@
 #include <imgui/backends/imgui_impl_opengl3.h>
 #include <iostream>
 #include <math.h>
-
+#include <vector>
 extern "C" {
 	_declspec(dllexport) int NvOptimusEnablement = 0x00000001;
 }
+constexpr float PI = 3.1415926535897f;
 #pragma region 顶点数据
 //正十二面体的顶点
 float vertices[] = {
@@ -180,136 +181,203 @@ float vertices[] = {
 	-0.5f, -0.5f, -0.5f,  0.0f, -1.0f, 0.0f,   // 左上角顶点
 	0.5f, -0.5f, 0.5f,    0.0f, -1.0f, 0.0f,  // 右下角顶点
 };
+//球体顶点
+std::vector<float> sphereVertices;
+std::vector<int> sphereIndices;
+std::vector<float> sphereNormal;
+//将球横纵划分成50*50的网格
+const int Y_SEGMENTS = 50;
+const int X_SEGMENTS = 50;
+void calculateSphereData()
+{
+	/*2-计算球体顶点*/
+//生成球的顶点
+	for (int y = 0; y <= Y_SEGMENTS; y++)
+	{
+		for (int x = 0; x <= X_SEGMENTS; x++)
+		{
+			float xSegment = (float)x / (float)X_SEGMENTS;
+			float ySegment = (float)y / (float)Y_SEGMENTS;
+			float xPos = std::cos(xSegment * 2.0f * PI) * std::sin(ySegment * PI);
+			float yPos = std::cos(ySegment * PI);
+			float zPos = std::sin(xSegment * 2.0f * PI) * std::sin(ySegment * PI);
+			sphereVertices.push_back(xPos);
+			sphereVertices.push_back(yPos);
+			sphereVertices.push_back(zPos);
+		}
+	}
+
+	//生成球的Indices
+	for (int i = 0; i < Y_SEGMENTS; i++)
+	{
+		for (int j = 0; j < X_SEGMENTS; j++)
+		{
+			sphereIndices.push_back(i * (X_SEGMENTS + 1) + j);
+			sphereIndices.push_back((i + 1) * (X_SEGMENTS + 1) + j);
+			sphereIndices.push_back((i + 1) * (X_SEGMENTS + 1) + j + 1);
+
+			sphereIndices.push_back(i * (X_SEGMENTS + 1) + j);
+			sphereIndices.push_back((i + 1) * (X_SEGMENTS + 1) + j + 1);
+			sphereIndices.push_back(i * (X_SEGMENTS + 1) + j + 1);
+			int index1 = i * (X_SEGMENTS + 1) + j;
+			int index2 = (i + 1) * (X_SEGMENTS + 1) + j;
+			int index3 = (i + 1) * (X_SEGMENTS + 1) + j + 1;
+			int index4 = i * (X_SEGMENTS + 1) + j + 1;
+
+			// 计算面的法向量
+			glm::vec3 vertex1(sphereVertices[index1 * 3], sphereVertices[index1 * 3 + 1], sphereVertices[index1 * 3 + 2]);
+			glm::vec3 vertex2(sphereVertices[index2 * 3], sphereVertices[index2 * 3 + 1], sphereVertices[index2 * 3 + 2]);
+			glm::vec3 vertex3(sphereVertices[index3 * 3], sphereVertices[index3 * 3 + 1], sphereVertices[index3 * 3 + 2]);
+			glm::vec3 vertex4(sphereVertices[index4 * 3], sphereVertices[index4 * 3 + 1], sphereVertices[index4 * 3 + 2]);
+
+			glm::vec3 normal1 = glm::normalize(glm::cross(vertex2 - vertex1, vertex3 - vertex1));
+
+			sphereNormal.push_back(normal1.x);
+			sphereNormal.push_back(normal1.y);
+			sphereNormal.push_back(normal1.z);
+			sphereNormal.push_back(normal1.x);
+			sphereNormal.push_back(normal1.y);
+			sphereNormal.push_back(normal1.z);
+
+		}
+	}
+}
 #pragma endregion 顶点数据
 
 unsigned int VAO, VBO;
-unsigned int VAO_cube, VBO_cube;
+unsigned int VAO_sphere, VBO_sphere,EBO_sphere;
 #pragma region 着色器源码
 // flat、Phong顶点着色器源码
 const char* vertexShaderSourceDefault = R"(
     #version 330 core
-    layout (location = 0) in vec3 aPos;
-    layout (location = 1) in vec3 aNormal;
+    layout (location = 0) in vec3 aPos;       // 顶点位置属性
+    layout (location = 1) in vec3 aNormal;    // 顶点法线属性
 
-    out vec3 FragPos;
-    out vec3 Normal;
+    out vec3 FragPos;   // 片段位置向量
+    out vec3 Normal;    // 法线向量
 
-    uniform mat4 model;
-    uniform mat4 view;
-    uniform mat4 projection;
+    uniform mat4 model;         // 模型矩阵
+    uniform mat4 view;          // 视图矩阵
+    uniform mat4 projection;    // 投影矩阵
 
     void main()
     {
-        FragPos = vec3(model * vec4(aPos, 1.0));
-        Normal = mat3(transpose(inverse(model))) * aNormal;
-        gl_Position = projection * view * vec4(FragPos, 1.0);
+        FragPos = vec3(model * vec4(aPos, 1.0));    // 将顶点位置转换到世界坐标系
+        Normal = mat3(transpose(inverse(model))) * aNormal;    // 将顶点法线转换到世界坐标系
+        gl_Position = projection * view * vec4(FragPos, 1.0);    // 计算最终的裁剪空间坐标
     }
 )";
+
+// Gouraud顶点着色器源码
+// 将顶点位置和法线转换到世界坐标系，并计算最终的裁剪空间坐标。同时，还计算了顶点到光源的方向向量。
 // Gouraud顶点着色器源码
 const char* vertexShaderSourceGouraud = R"(
     #version 330 core
-    layout (location = 0) in vec3 aPos;
-    layout (location = 1) in vec3 aNormal;
+    layout (location = 0) in vec3 aPos;       // 顶点位置属性
+    layout (location = 1) in vec3 aNormal;    // 顶点法线属性
 
-    out vec3 FragPos;
-    out vec3 Normal;
-    out vec3 LightDir;
+    out vec3 FragPos;   // 片段位置向量
+    out vec3 Normal;    // 法线向量
+    out vec3 LightDir;  // 光源方向向量
 
-    uniform mat4 model;
-    uniform mat4 view;
-    uniform mat4 projection;
-    uniform vec3 lightPos;
+    uniform mat4 model;         // 模型矩阵
+    uniform mat4 view;          // 视图矩阵
+    uniform mat4 projection;    // 投影矩阵
+    uniform vec3 lightPos;      // 光源位置
 
     void main()
     {
-        FragPos = vec3(model * vec4(aPos, 1.0));
-        Normal = mat3(transpose(inverse(model))) * aNormal;
-        LightDir = normalize(lightPos - FragPos);
-        gl_Position = projection * view * vec4(FragPos, 1.0);
+        FragPos = vec3(model * vec4(aPos, 1.0));    // 将顶点位置转换到世界坐标系
+        Normal = mat3(transpose(inverse(model))) * aNormal;    // 将顶点法线转换到世界坐标系
+        LightDir = normalize(lightPos - FragPos);    // 计算光源方向向量，即顶点到光源的方向
+        gl_Position = projection * view * vec4(FragPos, 1.0);    // 计算最终的裁剪空间坐标
     }
 )";
+
 // flat 片段着色器源码
 const char* fragmentShaderSourceFlat = R"(
     #version 330 core
-    out vec4 FragColor;
+    out vec4 FragColor;    // 输出片段颜色
 
-    in vec3 FragPos;
-    in vec3 Normal;
+    in vec3 FragPos;       // 片段位置向量
+    in vec3 Normal;        // 法线向量
 
-    uniform vec3 lightColor;
-    uniform vec3 lightPos;
-    uniform vec3 objectColor;
-	uniform float diffLight;
+    uniform vec3 lightColor;    // 光源颜色
+    uniform vec3 lightPos;      // 光源位置
+    uniform vec3 objectColor;   // 物体颜色
+    uniform float diffLight;    // 漫反射光照强度
 
     void main()
     {
-        vec3 lightDir = normalize(lightPos - FragPos);
-        float diff = max(dot(Normal, lightDir), diffLight);
-        vec3 diffuse = diff * lightColor * objectColor;
+        vec3 lightDir = normalize(lightPos - FragPos);    // 计算光源方向向量，即片段到光源的方向
+        float diff = max(dot(Normal, lightDir), diffLight);    // 计算漫反射光照强度
+        vec3 diffuse = diff * lightColor * objectColor;    // 计算漫反射光照的颜色
 
-        FragColor = vec4(diffuse, 1.0);
+        FragColor = vec4(diffuse, 1.0);    // 设置输出片段颜色
     }
 )";
+
 // Phong 片段着色器源码
 const char* fragmentShaderSourcePhong = R"(
     #version 330 core
-    out vec4 FragColor;
+    out vec4 FragColor;    // 输出片段颜色
 
-    in vec3 FragPos;
-    in vec3 Normal;
+    in vec3 FragPos;       // 片段位置向量
+    in vec3 Normal;        // 法线向量
 	
-	uniform float ambientLight;
-	uniform float mirrorReflectLight;
-	uniform float diffLight;
-    uniform vec3 lightColor;
-    uniform vec3 lightPos;
-    uniform vec3 objectColor;
-    uniform vec3 viewPos;
+	uniform float ambientLight;        // 环境光照强度
+	uniform float mirrorReflectLight;  // 镜面反射光照强度
+	uniform float diffLight;           // 漫反射光照强度
+    uniform vec3 lightColor;           // 光源颜色
+    uniform vec3 lightPos;             // 光源位置
+    uniform vec3 objectColor;          // 物体颜色
+    uniform vec3 viewPos;              // 视点位置
 
     void main()
     {
-        // Ambient
-        vec3 ambient = lightColor *ambientLight ;  // 常量环境光照强度
+        // 环境光照
+        vec3 ambient = lightColor * ambientLight;
 
-        // Diffuse
+        // 漫反射光照
         vec3 norm = normalize(Normal);
         vec3 lightDir = normalize(lightPos - FragPos);
         float diff = max(dot(norm, lightDir), diffLight);
         vec3 diffuse = diff * lightColor * objectColor;
 
-        // Specular
+        // 镜面反射光照
         vec3 viewDir = normalize(viewPos - FragPos);
         vec3 reflectDir = reflect(-lightDir, norm);
-        float spec = pow(max(dot(viewDir, reflectDir), 0.0), 8.0);  // 镜面反射高光强度
-        vec3 specular = spec * lightColor;
+        float spec = pow(max(dot(viewDir, reflectDir), 0.0), 8.0);
+        vec3 specular = spec * lightColor * mirrorReflectLight;
 
         vec3 result = ambient + diffuse + specular;
-        FragColor = vec4(result * objectColor, 1.0);
+        FragColor = vec4(result * objectColor, 1.0);    // 设置输出片段颜色
     }
 )";
 // Gouraud片段着色器源码
 const char* fragmentShaderSourceGouraud = R"(
     #version 330 core
-    out vec4 FragColor;
+    out vec4 FragColor;    // 输出片段颜色
 
-    in vec3 FragPos;
-    in vec3 Normal;
-    in vec3 LightDir;
+    in vec3 FragPos;       // 片段位置向量
+    in vec3 Normal;        // 法线向量
+    in vec3 LightDir;      // 光源方向向量
 
-    uniform vec3 lightColor;
-    uniform vec3 objectColor;
-	uniform float diffLight;
+    uniform vec3 lightColor;    // 光源颜色
+    uniform vec3 objectColor;   // 物体颜色
+	uniform float diffLight;    // 漫反射光照强度
 
     void main()
     {
-        // Diffuse
+        // 漫反射光照
         vec3 norm = normalize(Normal);
         float diff = max(dot(norm, LightDir), diffLight);
         vec3 diffuse = diff * lightColor * objectColor;
 
-        FragColor = vec4(diffuse, 1.0);
+        FragColor = vec4(diffuse, 1.0);    // 设置输出片段颜色
     }
 )";
+
 // 基本片元着色器，没有光照模型
 const char* fragmentShaderSourceSimple = R"(
     #version 330 core
@@ -387,6 +455,10 @@ enum SHADER_TYPE
 int shaderType = SHADER_TYPE::Flat;
 
 // 鼠标移动回调函数
+/*
+* 当鼠标左键按下时，根据鼠标的位置偏移计算旋转角度，并构建旋转矩阵来旋转模型。
+  当鼠标左键没有按下时，根据鼠标的位置偏移计算相机的偏航角和俯仰角，然后根据这些角度计算相机的前向方向向量。
+*/
 void mouseCallback(GLFWwindow* window, double xPos, double yPos)
 {
 
@@ -696,6 +768,8 @@ int main()
 	ImGui_ImplGlfw_InitForOpenGL(window, true);
 	ImGui_ImplOpenGL3_Init("#version 330 core");
 	
+	calculateSphereData();
+
 	// 创建 VAO 和 VBO
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
@@ -716,6 +790,32 @@ int main()
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 	glBindVertexArray(0);
 
+	// 球体解算
+	// 创建 VAO 和 VBO
+	glGenVertexArrays(1, &VAO_sphere);
+	glGenBuffers(1, &VBO_sphere);
+	// 绑定正十二面体
+	// 绑定 VAO
+	glBindVertexArray(VAO_sphere);
+
+	// 绑定 VBO 并设置顶点数据
+	glBindBuffer(GL_ARRAY_BUFFER, VBO_sphere);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * sphereVertices.size(), &sphereVertices[0], GL_STATIC_DRAW);
+
+	glGenBuffers(1, &EBO_sphere);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO_sphere);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sphereIndices.size() * sizeof(int), &sphereIndices[0], GL_STATIC_DRAW);
+
+	// 设置顶点属性指针
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+	glEnableVertexAttribArray(0);
+
+	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * sphereNormal.size(), &sphereNormal[0], GL_STATIC_DRAW);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(0));
+	glEnableVertexAttribArray(1);
+	// 解绑 VAO 和 VBO
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindVertexArray(0);
 	// 创建着色器程序
 	unsigned shaderProgram = 0;
 	unsigned int FlatShaderProgram = createShaderProgram(vertexShaderSourceDefault, fragmentShaderSourceFlat);
@@ -813,7 +913,10 @@ int main()
 		//启用多重采样抗锯齿（可选）
 		glfwWindowHint(GLFW_SAMPLES, 16);
 		glEnable(GL_MULTISAMPLE);
+		
 		glDrawArrays(GL_TRIANGLES, 0, 108);
+		//glLineWidth(16.0f);
+		//glDrawArrays(GL_LINE_STRIP, 0, 108);
 
 		// 解绑 VAO
 		glBindVertexArray(0);
@@ -828,12 +931,29 @@ int main()
 		glUniform3f(glGetUniformLocation(shaderProgram, "objectColor"), 0.1f,0.1f,0.1f);
 		glBindVertexArray(VAO);
 
-		glDisable(GL_DEPTH_TEST);
-		glDisable(GL_CULL_FACE);
-		//启用多重采样抗锯齿（可选）
 		glDrawArrays(GL_LINE_STRIP, 108, 36);
 
 		// 解绑 VAO
+		glBindVertexArray(0);
+
+		//绘制球体
+		//启用深度测试
+		glEnable(GL_DEPTH_TEST);
+		//启用面剔除
+		glEnable(GL_CULL_FACE);
+		//启用多重采样抗锯齿（可选）
+		glfwWindowHint(GLFW_SAMPLES, 16);
+		glEnable(GL_MULTISAMPLE);
+
+		glBindVertexArray(VAO_sphere);
+
+		glm::mat4 model3 = glm::mat4(1.0f);
+		model3 = glm::translate(model3, glm::vec3(-2.0f));
+		model3 = glm::scale(model3, glm::vec3(1.0f)); // 缩放模型
+
+		glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "model"), 1, GL_FALSE, glm::value_ptr(model3));
+		glUniform3f(glGetUniformLocation(shaderProgram, "objectColor"), 0.5f, 0.7f, 0.3f);
+		glDrawElements(GL_TRIANGLES, X_SEGMENTS * Y_SEGMENTS * 6, GL_UNSIGNED_INT, 0);
 		glBindVertexArray(0);
 		if (isShowImGui)
 		{
