@@ -87,6 +87,8 @@ face_indices = [
     (19,17,16)
 ]
 
+for vertex in vertices:
+    print(f"{vertex[0]:.4f}, {vertex[1]:.4f}, {vertex[2]:.4f},")
 #求点的模
 def distance(p):
     x=p[0]
@@ -117,22 +119,30 @@ last_index = -1
 for face_index in range(len(face_indices)):
     face = face_indices[face_index]
     #一个面由三个三角形构成，这三个三角形应该共用一个法向量，所以可以通过取整快速略去一些法向量的计算
-    if(int(face_index /3) != last_index):
-
-        #取点计算两个向量
-        v1 = np.array(vertices[face[0]])
-        v2 = np.array(vertices[face[1]])
-        v3 = np.array(vertices[face[2]])
-
-        #计算叉乘
-        normal = np.cross(v2 - v1, v3 - v1)
-        normalized_normal = normal / np.linalg.norm(normal)
-        normals.append(normalized_normal)
-        last_normal = normal
-        last_index = int(face_index / 3)
-    else:
-        normal = last_normal
-    
+    #if(int(face_index /3) != last_index):
+#
+    #    #取点计算两个向量
+    #    v1 = np.array(vertices[face[0]])
+    #    v2 = np.array(vertices[face[1]])
+    #    v3 = np.array(vertices[face[2]])
+#
+    #    #计算叉乘
+    #    normal = np.cross(v2 - v1, v3 - v1)
+    #    normalized_normal = normal / np.linalg.norm(normal)
+    #    normals.append(normalized_normal)
+    #    last_normal = normal
+    #    last_index = int(face_index / 3)
+    #else:
+    #    normal = last_normal
+    v1 = np.array(vertices[face[0]])
+    v2 = np.array(vertices[face[1]])
+    v3 = np.array(vertices[face[2]])
+    #计算叉乘
+    normal = np.cross(v2 - v1, v3 - v1)
+    normalized_normal = normal / np.linalg.norm(normal)
+    normals.append(normalized_normal)
+    #last_normal = normal
+    #last_index = int(face_index / 3)
     for vertex_index in face:
         vertex = vertices[vertex_index]
         print(f"\t{vertex[0]:.2f}f, {vertex[1]:.2f}f, {vertex[2]:.2f}f,\t{normal[0]:.2f}, {normal[1]:.2f}f, {normal[2]:.2f}f,")

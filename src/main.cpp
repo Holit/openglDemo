@@ -19,54 +19,48 @@ constexpr float PI = 3.1415926535897f;
 //正方体顶点
 float cubeVertices[] ={
 
-	// 位置坐标       // 法线向量
-	// 前面
-	-0.5f, -0.5f, 0.5f,  0.0f, 0.0f, 1.0f,  // 左下角顶点
-	0.5f, -0.5f, 0.5f,   0.0f, 0.0f, 1.0f,  // 右下角顶点
-	0.5f, 0.5f, 0.5f,    0.0f, 0.0f, 1.0f,  // 右上角顶点
-	-0.5f, -0.5f, 0.5f,  0.0f, 0.0f, 1.0f,  // 左下角顶点
-	-0.5f, 0.5f, 0.5f,   0.0f, 0.0f, 1.0f,  // 左上角顶点
-	0.5f, 0.5f, 0.5f,    0.0f, 0.0f, 1.0f,  // 右上角顶点
+		-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+		 0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+		 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+		 0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+		-0.5f,  0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
+		-0.5f, -0.5f, -0.5f,  0.0f,  0.0f, -1.0f,
 
-	// 背面
-	-0.5f, -0.5f, -0.5f,  0.0f, 0.0f, -1.0f,  // 左下角顶点
-	0.5f, -0.5f, -0.5f,   0.0f, 0.0f, -1.0f,  // 右下角顶点
-	0.5f, 0.5f, -0.5f,    0.0f, 0.0f, -1.0f,  // 右上角顶点
-	-0.5f, -0.5f, -0.5f,  0.0f, 0.0f, -1.0f,  // 左下角顶点
-	-0.5f, 0.5f, -0.5f,   0.0f, 0.0f, -1.0f,  // 左上角顶点
-	0.5f, 0.5f, -0.5f,    0.0f, 0.0f, -1.0f,  // 右上角顶点
+		-0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+		 0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+		 0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+		 0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+		-0.5f,  0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
+		-0.5f, -0.5f,  0.5f,  0.0f,  0.0f,  1.0f,
 
-	// 左侧面
-	-0.5f, -0.5f, -0.5f,  -1.0f, 0.0f, 0.0f,  // 左下角顶点
-	-0.5f, -0.5f, 0.5f,   -1.0f, 0.0f, 0.0f,  // 右下角顶点
-	-0.5f, 0.5f, 0.5f,    -1.0f, 0.0f, 0.0f,  // 右上角顶点
-	-0.5f, -0.5f, -0.5f,  -1.0f, 0.0f, 0.0f,  // 左下角顶点
-	-0.5f, 0.5f, -0.5f,   -1.0f, 0.0f, 0.0f,  // 左上角顶点
-	-0.5f, 0.5f, 0.5f,    -1.0f, 0.0f, 0.0f,  // 右上角顶点
+		-0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+		-0.5f,  0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+		-0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+		-0.5f, -0.5f, -0.5f, -1.0f,  0.0f,  0.0f,
+		-0.5f, -0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
+		-0.5f,  0.5f,  0.5f, -1.0f,  0.0f,  0.0f,
 
-	// 右侧面
-	0.5f, -0.5f, -0.5f,   1.0f, 0.0f, 0.0f,  // 左下角顶点
-	0.5f, -0.5f, 0.5f,    1.0f, 0.0f, 0.0f,  // 右下角顶点
-	0.5f, 0.5f, 0.5f,     1.0f, 0.0f, 0.0f,  // 右上角顶点
-	0.5f, -0.5f, -0.5f,   1.0f, 0.0f, 0.0f,  // 左下角顶点
-	0.5f, 0.5f, -0.5f,    1.0f, 0.0f, 0.0f,  // 左上角顶点
-	0.5f, 0.5f, 0.5f,     1.0f, 0.0f, 0.0f,  // 右上角顶点
+		 0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+		 0.5f,  0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+		 0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+		 0.5f, -0.5f, -0.5f,  1.0f,  0.0f,  0.0f,
+		 0.5f, -0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
+		 0.5f,  0.5f,  0.5f,  1.0f,  0.0f,  0.0f,
 
-	// 顶部面
-	-0.5f, 0.5f, 0.5f,    0.0f, 1.0f, 0.0f,  // 左下角顶点
-	0.5f, 0.5f, 0.5f,     0.0f, 1.0f, 0.0f,  // 右下角顶点
-	0.5f, 0.5f, -0.5f,    0.0f, 1.0f, 0.0f,  // 右上角顶点
-	-0.5f, 0.5f, 0.5f,    0.0f, 1.0f, 0.0f,  // 左下角顶点
-	-0.5f, 0.5f, -0.5f,   0.0f, 1.0f, 0.0f,  // 左上角顶点
-	0.5f, 0.5f, -0.5f,    0.0f, 1.0f, 0.0f,  // 右上角顶点
+		-0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+		 0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
+		 0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+		 0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+		-0.5f, -0.5f,  0.5f,  0.0f, -1.0f,  0.0f,
+		-0.5f, -0.5f, -0.5f,  0.0f, -1.0f,  0.0f,
 
-	// 底部面
-	-0.5f, -0.5f, 0.5f,   0.0f, -1.0f, 0.0f,  // 左下角顶点
-	0.5f, -0.5f, 0.5f,    0.0f, -1.0f, 0.0f,  // 右下角顶点
-	0.5f, -0.5f, -0.5f,   0.0f, -1.0f, 0.0f,  // 右上角顶点
-	-0.5f, -0.5f, 0.5f,   0.0f, -1.0f, 0.0f,  // 左下角顶点
-	-0.5f, -0.5f, -0.5f,  0.0f, -1.0f, 0.0f,   // 左上角顶点
-	0.5f, -0.5f, 0.5f,    0.0f, -1.0f, 0.0f,  // 右下角顶点
+		-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+		 0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f,
+		 0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+		 0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+		-0.5f,  0.5f,  0.5f,  0.0f,  1.0f,  0.0f,
+		-0.5f,  0.5f, -0.5f,  0.0f,  1.0f,  0.0f
+
 
 };
 //正十二面体的顶点
@@ -180,6 +174,116 @@ float dodecahedronVertices[] = {
 		0.00f, -0.36f, -0.93f,  -0.25, 0.00f, -0.41f,
 		-0.58f, -0.58f, -0.58f, -0.25, 0.00f, -0.41f,
 };
+float dodecahedronVertices2[] = {
+		-0.93f, 0.00f, -0.36f,  -0.41, -0.25f, -0.00f,
+		-0.58f, -0.58f, -0.58f, -0.41, -0.25f, -0.00f,
+		-0.36f, -0.93f, 0.00f,  -0.41, -0.25f, -0.00f,
+		-0.93f, 0.00f, -0.36f,  -0.67, -0.41f, 0.00f,
+		-0.36f, -0.93f, 0.00f,  -0.67, -0.41f, 0.00f,
+		-0.93f, 0.00f, 0.36f,   -0.67, -0.41f, 0.00f,
+		-0.93f, 0.00f, 0.36f,   -0.41, -0.25f, 0.00f,
+		-0.36f, -0.93f, 0.00f,  -0.41, -0.25f, 0.00f,
+		-0.58f, -0.58f, 0.58f,  -0.41, -0.25f, 0.00f,
+		-0.58f, -0.58f, 0.58f,  0.00, -0.41f, 0.25f,
+		-0.36f, -0.93f, 0.00f,  0.00, -0.41f, 0.25f,
+		0.36f, -0.93f, 0.00f,   0.00, -0.41f, 0.25f,
+		0.00f, -0.36f, 0.93f,   -0.00, -0.67f, 0.41f,
+		-0.58f, -0.58f, 0.58f,  -0.00, -0.67f, 0.41f,
+		0.36f, -0.93f, 0.00f,   -0.00, -0.67f, 0.41f,
+		0.00f, -0.36f, 0.93f,   0.00, -0.41f, 0.25f,
+		0.36f, -0.93f, 0.00f,   0.00, -0.41f, 0.25f,
+		0.58f, -0.58f, 0.58f,   0.00, -0.41f, 0.25f,
+		0.00f, 0.36f, 0.93f,    0.25, 0.00f, 0.41f,
+		0.00f, -0.36f, 0.93f,   0.25, 0.00f, 0.41f,
+		0.58f, -0.58f, 0.58f,   0.25, 0.00f, 0.41f,
+		0.00f, 0.36f, 0.93f,    0.41, -0.00f, 0.67f,
+		0.58f, -0.58f, 0.58f,   0.41, -0.00f, 0.67f,
+		0.93f, 0.00f, 0.36f,    0.41, -0.00f, 0.67f,
+		0.00f, 0.36f, 0.93f,    0.25, 0.00f, 0.41f,
+		0.93f, 0.00f, 0.36f,    0.25, 0.00f, 0.41f,
+		0.58f, 0.58f, 0.58f,    0.25, 0.00f, 0.41f,
+		-0.58f, 0.58f, -0.58f,  -0.41, 0.25f, 0.00f,
+		-0.93f, 0.00f, -0.36f,  -0.41, 0.25f, 0.00f,
+		-0.93f, 0.00f, 0.36f,   -0.41, 0.25f, 0.00f,
+		-0.58f, 0.58f, -0.58f,  -0.67, 0.41f, 0.00f,
+		-0.93f, 0.00f, 0.36f,   -0.67, 0.41f, 0.00f,
+		-0.58f, 0.58f, 0.58f,   -0.67, 0.41f, 0.00f,
+		-0.58f, 0.58f, -0.58f,  -0.41, 0.25f, 0.00f,
+		-0.58f, 0.58f, 0.58f,   -0.41, 0.25f, 0.00f,
+		-0.36f, 0.93f, 0.00f,   -0.41, 0.25f, 0.00f,
+		-0.93f, 0.00f, 0.36f,   -0.25, -0.00f, 0.41f,
+		-0.58f, -0.58f, 0.58f,  -0.25, -0.00f, 0.41f,
+		0.00f, -0.36f, 0.93f,   -0.25, -0.00f, 0.41f,
+		-0.93f, 0.00f, 0.36f,   -0.41, 0.00f, 0.67f,
+		0.00f, -0.36f, 0.93f,   -0.41, 0.00f, 0.67f,
+		-0.58f, 0.58f, 0.58f,   -0.41, 0.00f, 0.67f,
+		-0.58f, 0.58f, 0.58f,   -0.25, 0.00f, 0.41f,
+		0.00f, -0.36f, 0.93f,   -0.25, 0.00f, 0.41f,
+		0.00f, 0.36f, 0.93f,    -0.25, 0.00f, 0.41f,
+		-0.36f, 0.93f, 0.00f,   -0.00, 0.41f, 0.25f,
+		-0.58f, 0.58f, 0.58f,   -0.00, 0.41f, 0.25f,
+		0.00f, 0.36f, 0.93f,    -0.00, 0.41f, 0.25f,
+		-0.36f, 0.93f, 0.00f,   0.00, 0.67f, 0.41f,
+		0.00f, 0.36f, 0.93f,    0.00, 0.67f, 0.41f,
+		0.58f, 0.58f, 0.58f,    0.00, 0.67f, 0.41f,
+		-0.36f, 0.93f, 0.00f,   -0.00, 0.41f, 0.25f,
+		0.58f, 0.58f, 0.58f,    -0.00, 0.41f, 0.25f,
+		0.36f, 0.93f, 0.00f,    -0.00, 0.41f, 0.25f,
+		0.36f, 0.93f, 0.00f,    0.41, 0.25f, 0.00f,
+		0.58f, 0.58f, 0.58f,    0.41, 0.25f, 0.00f,
+		0.93f, 0.00f, 0.36f,    0.41, 0.25f, 0.00f,
+		0.36f, 0.93f, 0.00f,    0.67, 0.41f, 0.00f,
+		0.93f, 0.00f, 0.36f,    0.67, 0.41f, 0.00f,
+		0.93f, 0.00f, -0.36f,   0.67, 0.41f, 0.00f,
+		0.36f, 0.93f, 0.00f,    0.41, 0.25f, -0.00f,
+		0.93f, 0.00f, -0.36f,   0.41, 0.25f, -0.00f,
+		0.58f, 0.58f, -0.58f,   0.41, 0.25f, -0.00f,
+		0.93f, 0.00f, -0.36f,   0.41, -0.25f, 0.00f,
+		0.93f, 0.00f, 0.36f,    0.41, -0.25f, 0.00f,
+		0.58f, -0.58f, 0.58f,   0.41, -0.25f, 0.00f,
+		0.93f, 0.00f, -0.36f,   0.67, -0.41f, 0.00f,
+		0.58f, -0.58f, 0.58f,   0.67, -0.41f, 0.00f,
+		0.36f, -0.93f, 0.00f,   0.67, -0.41f, 0.00f,
+		0.93f, 0.00f, -0.36f,   0.41, -0.25f, -0.00f,
+		0.36f, -0.93f, 0.00f,   0.41, -0.25f, -0.00f,
+		0.58f, -0.58f, -0.58f,  0.41, -0.25f, -0.00f,
+		-0.36f, 0.93f, 0.00f,   -0.00, 0.41f, -0.25f,
+		0.00f, 0.36f, -0.93f,   -0.00, 0.41f, -0.25f,
+		-0.58f, 0.58f, -0.58f,  -0.00, 0.41f, -0.25f,
+		-0.36f, 0.93f, 0.00f,   0.00, 0.67f, -0.41f,
+		0.36f, 0.93f, 0.00f,    0.00, 0.67f, -0.41f,
+		0.00f, 0.36f, -0.93f,   0.00, 0.67f, -0.41f,
+		0.36f, 0.93f, 0.00f,    0.00, 0.41f, -0.25f,
+		0.58f, 0.58f, -0.58f,   0.00, 0.41f, -0.25f,
+		0.00f, 0.36f, -0.93f,   0.00, 0.41f, -0.25f,
+		0.00f, 0.36f, -0.93f,   0.25, 0.00f, -0.41f,
+		0.58f, 0.58f, -0.58f,   0.25, 0.00f, -0.41f,
+		0.93f, 0.00f, -0.36f,   0.25, 0.00f, -0.41f,
+		0.00f, 0.36f, -0.93f,   0.41, 0.00f, -0.67f,
+		0.93f, 0.00f, -0.36f,   0.41, 0.00f, -0.67f,
+		0.00f, -0.36f, -0.93f,  0.41, 0.00f, -0.67f,
+		0.00f, -0.36f, -0.93f,  0.25, -0.00f, -0.41f,
+		0.93f, 0.00f, -0.36f,   0.25, -0.00f, -0.41f,
+		0.58f, -0.58f, -0.58f,  0.25, -0.00f, -0.41f,
+		0.00f, -0.36f, -0.93f,  0.00, -0.41f, -0.25f,
+		0.58f, -0.58f, -0.58f,  0.00, -0.41f, -0.25f,
+		0.36f, -0.93f, 0.00f,   0.00, -0.41f, -0.25f,
+		0.00f, -0.36f, -0.93f,  0.00, -0.67f, -0.41f,
+		0.36f, -0.93f, 0.00f,   0.00, -0.67f, -0.41f,
+		-0.36f, -0.93f, 0.00f,  0.00, -0.67f, -0.41f,
+		0.00f, -0.36f, -0.93f,  -0.00, -0.41f, -0.25f,
+		-0.36f, -0.93f, 0.00f,  -0.00, -0.41f, -0.25f,
+		-0.58f, -0.58f, -0.58f, -0.00, -0.41f, -0.25f,
+		-0.58f, 0.58f, -0.58f,  -0.25, 0.00f, -0.41f,
+		0.00f, 0.36f, -0.93f,   -0.25, 0.00f, -0.41f,
+		0.00f, -0.36f, -0.93f,  -0.25, 0.00f, -0.41f,
+		-0.58f, 0.58f, -0.58f,  -0.41, 0.00f, -0.67f,
+		0.00f, -0.36f, -0.93f,  -0.41, 0.00f, -0.67f,
+		-0.93f, 0.00f, -0.36f,  -0.41, 0.00f, -0.67f,
+		-0.93f, 0.00f, -0.36f,  -0.25, -0.00f, -0.41f,
+		0.00f, -0.36f, -0.93f,  -0.25, -0.00f, -0.41f,
+		-0.58f, -0.58f, -0.58f, -0.25, -0.00f, -0.41f,
+};
 //球体顶点
 std::vector<float> sphereVertices;
 std::vector<int> sphereIndices;
@@ -254,14 +358,14 @@ unsigned int VAO_cube, VBO_cube;
 	Gouraud Shading 用顶点法线算出颜色再插值；
 	Phong Shading 用顶点法线插值后算像素颜色
 */
-// flat、Phong顶点着色器源码
-const char* vertexShaderSourceDefault = R"(
+// flat顶点着色器源码
+const char* vertexShaderSourceFlat = R"(
     #version 330 core
     layout (location = 0) in vec3 aPos;       // 顶点位置属性
     layout (location = 1) in vec3 aNormal;    // 顶点法线属性
 
     out vec3 FragPos;   // 片段位置向量
-    out vec3 Normal;    // 法线向量
+    flat out vec3 Normal;    // 法线向量
 
     uniform mat4 model;         // 模型矩阵
     uniform mat4 view;          // 视图矩阵
@@ -273,40 +377,100 @@ const char* vertexShaderSourceDefault = R"(
         Normal = mat3(transpose(inverse(model))) * aNormal;    // 将顶点法线转换到世界坐标系
         gl_Position = projection * view * vec4(FragPos, 1.0);    // 计算最终的裁剪空间坐标
     }
+)";
+//Phong顶点着色器源码
+const char* vertexShaderSourcePhong = R"(
+	#version 330 core
+	layout (location = 0) in vec3 aPos;        // 顶点位置属性
+	layout (location = 1) in vec3 aNormal;     // 顶点法线属性
+
+	out vec3 FragPos;     // 片段位置向量
+	out vec3 Normal;      // 法线向量
+	out vec3 LightPos;    // 光源位置向量（视图空间）
+
+	uniform vec3 lightPos;      // 光源位置（世界空间）
+
+	uniform mat4 model;         // 模型矩阵
+	uniform mat4 view;          // 视图矩阵
+	uniform mat4 projection;    // 投影矩阵
+
+	void main()
+	{
+		gl_Position = projection * view * model * vec4(aPos, 1.0);    // 计算最终的裁剪空间坐标
+		FragPos = vec3(view * model * vec4(aPos, 1.0));    // 将顶点位置转换到视图空间
+		Normal = mat3(transpose(inverse(view * model))) * aNormal;    // 将顶点法线转换到视图空间
+		LightPos = vec3(view * vec4(lightPos, 1.0));    // 将光源位置转换到视图空间
+	}
 )";
 
 // Gouraud顶点着色器源码
 // 将顶点位置和法线转换到世界坐标系，并计算最终的裁剪空间坐标。同时，还计算了顶点到光源的方向向量。
 const char* vertexShaderSourceGouraud = R"(
-    #version 330 core
-    layout (location = 0) in vec3 aPos;       // 顶点位置属性
-    layout (location = 1) in vec3 aNormal;    // 顶点法线属性
+	#version 330 core
+	layout (location = 0) in vec3 aPos;        // 顶点位置属性
+	layout (location = 1) in vec3 aNormal;     // 顶点法线属性
 
-    out vec3 FragPos;   // 片段位置向量
-    out vec3 Normal;    // 法线向量
-    out vec3 LightDir;  // 光源方向向量
+	out vec3 LightingColor;    // 光照计算的结果颜色
 
-    uniform mat4 model;         // 模型矩阵
-    uniform mat4 view;          // 视图矩阵
-    uniform mat4 projection;    // 投影矩阵
-    uniform vec3 lightPos;      // 光源位置
+	uniform vec3 lightPos;     // 光源位置
+	uniform vec3 viewPos;      // 视点位置
+	uniform vec3 lightColor;   // 光源颜色
 
-    void main()
-    {
-        FragPos = vec3(model * vec4(aPos, 1.0));    // 将顶点位置转换到世界坐标系
-        Normal = mat3(transpose(inverse(model))) * aNormal;    // 将顶点法线转换到世界坐标系
-        LightDir = normalize(lightPos - FragPos);    // 计算光源方向向量，即顶点到光源的方向
-        gl_Position = projection * view * vec4(FragPos, 1.0);    // 计算最终的裁剪空间坐标
-    }
+	uniform mat4 model;         // 模型矩阵
+	uniform mat4 view;          // 视图矩阵
+	uniform mat4 projection;    // 投影矩阵
+	uniform float specularStrength;    // 为了更好地展示Gouraud Shading的效果，将其设置得较高
+	uniform float ambientStrength;
+
+	void main()
+	{
+		gl_Position = projection * view * model * vec4(aPos, 1.0);    // 计算最终的裁剪空间坐标
+
+		// Gouraud Shading
+		// ------------------------
+		vec3 Position = vec3(model * vec4(aPos, 1.0));    // 将顶点位置转换到世界坐标系
+		vec3 Normal = mat3(transpose(inverse(model))) * aNormal;    // 将顶点法线转换到世界坐标系
+
+		// 环境光
+		vec3 ambient = ambientStrength * lightColor;
+
+		// 漫反射
+		vec3 norm = normalize(Normal);
+		vec3 lightDir = normalize(lightPos - Position);
+		float diff = max(dot(norm, lightDir), 0.0);
+		vec3 diffuse = diff * lightColor;
+
+		// 镜面反射
+		vec3 viewDir = normalize(viewPos - Position);
+		vec3 reflectDir = reflect(-lightDir, norm);
+		float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
+		vec3 specular = specularStrength * spec * lightColor;
+
+		LightingColor = ambient + diffuse + specular;    // 计算最终的颜色
+	}
+
 )";
 
+const char* vertexShaderSourceSimple = R"(
+	#version 330 core
+	layout (location = 0) in vec3 aPos;
+
+	uniform mat4 model;
+	uniform mat4 view;
+	uniform mat4 projection;
+
+	void main()
+	{
+		gl_Position = projection * view * model * vec4(aPos, 1.0);
+	}
+)";
 // flat 片段着色器源码
 const char* fragmentShaderSourceFlat = R"(
     #version 330 core
     out vec4 FragColor;    // 输出片段颜色
 
     in vec3 FragPos;       // 片段位置向量
-    in vec3 Normal;        // 法线向量
+    flat in vec3 Normal;        // 法线向量
 
     uniform vec3 lightColor;    // 光源颜色
     uniform vec3 lightPos;      // 光源位置
@@ -321,82 +485,68 @@ const char* fragmentShaderSourceFlat = R"(
 
         FragColor = vec4(diffuse, 1.0);    // 设置输出片段颜色
     }
+
 )";
 
 // Phong 片段着色器源码
 const char* fragmentShaderSourcePhong = R"(
-    #version 330 core
-    out vec4 FragColor;    // 输出片段颜色
+	#version 330 core
+	out vec4 FragColor;
 
-    in vec3 FragPos;       // 片段位置向量
-    in vec3 Normal;        // 法线向量
-	
-	uniform float ambientLight;        // 环境光照强度
-	uniform float mirrorReflectLight;  // 镜面反射光照强度
-	uniform float diffLight;           // 漫反射光照强度
-    uniform vec3 lightColor;           // 光源颜色
-    uniform vec3 lightPos;             // 光源位置
-    uniform vec3 objectColor;          // 物体颜色
-    uniform vec3 viewPos;              // 视点位置
+	in vec3 FragPos;     // 片段位置向量
+	in vec3 Normal;      // 法线向量
+	in vec3 LightPos;    // 光源位置向量（额外的输入变量），由于需要在视图空间中使用光源位置，因此在顶点着色器中计算该值
 
-    void main()
-    {
-        // 环境光照
-        vec3 ambient = lightColor * ambientLight;
+	uniform vec3 lightColor;    // 光源颜色
+	uniform vec3 objectColor;   // 物体颜色
+	uniform float specularStrength;
+	uniform float ambientStrength;
+	void main()
+	{
+		// 环境光
+		vec3 ambient = ambientStrength * lightColor;
 
-        // 漫反射光照
-        vec3 norm = normalize(Normal);
-        vec3 lightDir = normalize(lightPos - FragPos);
-        float diff = max(dot(norm, lightDir), diffLight);
-        vec3 diffuse = diff * lightColor * objectColor;
+		// 漫反射
+		vec3 norm = normalize(Normal);
+		vec3 lightDir = normalize(LightPos - FragPos);
+		float diff = max(dot(norm, lightDir), 0.0);
+		vec3 diffuse = diff * lightColor;
 
-        // 镜面反射光照
-        vec3 viewDir = normalize(viewPos - FragPos);
-        vec3 reflectDir = reflect(-lightDir, norm);
-        float spec = pow(max(dot(viewDir, reflectDir), 0.0), 8.0);
-        vec3 specular = spec * lightColor * mirrorReflectLight;
+		// 镜面反射
+		vec3 viewDir = normalize(-FragPos);    // 观察方向，视点在视图空间中始终为(0,0,0)，所以viewDir为(0,0,0) - FragPos => -FragPos
+		vec3 reflectDir = reflect(-lightDir, norm);
+		float spec = pow(max(dot(viewDir, reflectDir), 0.0), 32);
+		vec3 specular = specularStrength * spec * lightColor;
 
-        vec3 result = ambient + diffuse + specular ;
-        FragColor = vec4(result * objectColor, 1.0);    // 设置输出片段颜色
-    }
+		vec3 result = (ambient + diffuse + specular) * objectColor;    // 计算最终的颜色
+		FragColor = vec4(result, 1.0);
+	}
+
 )";
 // Gouraud片段着色器源码
 const char* fragmentShaderSourceGouraud = R"(
-    #version 330 core
-    out vec4 FragColor;    // 输出片段颜色
+	#version 330 core
+	out vec4 FragColor;
 
-    in vec3 FragPos;       // 片段位置向量
-    in vec3 Normal;        // 法线向量
-    in vec3 LightDir;      // 光源方向向量
+	in vec3 LightingColor;    // 从顶点着色器传递过来的光照颜色
 
-    uniform vec3 lightColor;    // 光源颜色
-    uniform vec3 objectColor;   // 物体颜色
-	uniform float diffLight;    // 漫反射光照强度
+	uniform vec3 objectColor;    // 物体颜色
 
-    void main()
-    {
-        // 漫反射光照
-        vec3 norm = normalize(Normal);
-        float diff = max(dot(norm, LightDir), diffLight);
-        vec3 diffuse = diff * lightColor * objectColor;
-
-        FragColor = vec4(diffuse, 1.0);    // 设置输出片段颜色
-    }
+	void main()
+	{
+	   FragColor = vec4(LightingColor * objectColor, 1.0);    // 将光照颜色和物体颜色相乘，作为片段的最终颜色
+	}
 )";
 
 // 基本片元着色器，没有光照模型
 const char* fragmentShaderSourceSimple = R"(
+	#version 330 core
+	out vec4 FragColor;
 
-    #version 330 core
-    out vec4 FragColor;    // 输出片段颜色
-
-    in vec3 FragPos;       // 片段位置向量
-
-    void main()
-    {
-
-        FragColor = vec4(FragPos, 1.0);    // 设置输出片段颜色
-    }
+	void main()
+	{
+		FragColor = vec4(1.0); // set all 4 vector values to 1.0
+	}
 )";
 #pragma endregion 着色器源码
 // 窗口大小
@@ -413,8 +563,8 @@ glm::mat4 model;
 
 //光源位置
 glm::vec3 lightPos = glm::vec3(1.0f, 1.0f, 0.8f);
-float ambientLight = 0.1f;
-float mirrorReflectLight = 16.0f;
+float ambientStrength = 0.1f;
+float specularStrength = 0.5f;
 float diffLight = 0.1f;
 
 // 鼠标相关变量
@@ -534,11 +684,11 @@ void scrollCallback(GLFWwindow* window, double xOffset, double yOffset)
 	bool isFaster = isFaster = keys[GLFW_KEY_LEFT_ALT];
 	if (keys[GLFW_KEY_LEFT_CONTROL] && keys[GLFW_KEY_Z])
 	{
-		ambientLight += yOffset* scrollSensitive * (isFaster? 1 : 0.005);
+		ambientStrength += yOffset* scrollSensitive * (isFaster? 1 : 0.005);
 	}
 	else if ((keys[GLFW_KEY_LEFT_CONTROL] && keys[GLFW_KEY_X]))
 	{
-		mirrorReflectLight += yOffset * scrollSensitive * (isFaster ? 1 : 0.05);
+		specularStrength += yOffset * scrollSensitive * (isFaster ? 1 : 0.05);
 	}
 	else if ((keys[GLFW_KEY_LEFT_CONTROL] && keys[GLFW_KEY_C]))
 	{
@@ -548,8 +698,8 @@ void scrollCallback(GLFWwindow* window, double xOffset, double yOffset)
 	{
 		aspect -= yOffset * scrollSensitive;
 	}
-	if (ambientLight < 0.01f)ambientLight = 0.01f;
-	if (mirrorReflectLight < 0.01f)mirrorReflectLight = 0.01f;
+	if (ambientStrength < 0.01f)ambientStrength = 0.01f;
+	if (specularStrength < 0.01f)specularStrength = 0.01f;
 	if (diffLight < 0.01f)diffLight = 0.01f;
 }
 void objectMove()
@@ -698,11 +848,11 @@ void ImGuiRender()
 
 	if (keys[GLFW_KEY_LEFT_CONTROL] && keys[GLFW_KEY_Z])
 	{
-		ImGui::Text("ambientLight=%.2f",ambientLight);
+		ImGui::Text("ambientStrength=%.2f",ambientStrength);
 	}
 	else if ((keys[GLFW_KEY_LEFT_CONTROL] && keys[GLFW_KEY_X]))
 	{
-		ImGui::Text("mirrorReflectLight=%.1f", mirrorReflectLight);
+		ImGui::Text("specularStrength=%.1f", specularStrength);
 	}
 	else if ((keys[GLFW_KEY_LEFT_CONTROL] && keys[GLFW_KEY_C]))
 	{
@@ -828,6 +978,7 @@ int main()
 	// 绑定 VAO
 	glBindVertexArray(VAO_dodecahedron);
 
+	// 在此处更改为未同意向量的正十二面体
 	// 绑定 VBO 并设置顶点数据
 	glBindBuffer(GL_ARRAY_BUFFER, VBO_dodecahedron);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(dodecahedronVertices), dodecahedronVertices, GL_STATIC_DRAW);
@@ -873,10 +1024,10 @@ int main()
 	
 	// 创建着色器程序
 	unsigned shaderProgram = 0;
-	unsigned int FlatShaderProgram = createShaderProgram(vertexShaderSourceDefault, fragmentShaderSourceFlat);
-	unsigned int PhongShaderProgram = createShaderProgram(vertexShaderSourceDefault, fragmentShaderSourcePhong);
+	unsigned int FlatShaderProgram = createShaderProgram(vertexShaderSourceFlat, fragmentShaderSourceFlat);
+	unsigned int PhongShaderProgram = createShaderProgram(vertexShaderSourcePhong, fragmentShaderSourcePhong);
 	unsigned int GouraudShaderProgram = createShaderProgram(vertexShaderSourceGouraud, fragmentShaderSourceGouraud);
-	unsigned int SimpleShaderProgram = createShaderProgram(vertexShaderSourceDefault, fragmentShaderSourceSimple);
+	unsigned int SimpleShaderProgram = createShaderProgram(vertexShaderSourceSimple, fragmentShaderSourceSimple);
 	// 注册回调函数
 	glfwSetCursorPosCallback(window, mouseCallback);
 	glfwSetKeyCallback(window, keyCallback);
@@ -929,15 +1080,15 @@ int main()
 		int viewLoc = glGetUniformLocation(shaderProgram, "view");
 		int projectionLoc = glGetUniformLocation(shaderProgram, "projection");
 		int viewPos = glGetUniformLocation(shaderProgram, "viewPos");
-		int ambientLightLoc = glGetUniformLocation(shaderProgram, "ambientLight");
-		int mirrorReflectLightLoc = glGetUniformLocation(shaderProgram, "diffLight");
+		int ambientStrengthLoc = glGetUniformLocation(shaderProgram, "ambientStrength");
+		int specularStrengthLoc = glGetUniformLocation(shaderProgram, "specularStrength");
 		int diffLightLoc = glGetUniformLocation(shaderProgram, "diffLight");
 
 		glUniform3f(objectColorLoc, 0.2f, 0.4f,0.2f);
 		glUniform3f(lightColorLoc, 1.0f, 1.0f, 1.0f);
 		glUniform3f(lightPosLoc, lightPos.x, lightPos.y, lightPos.z);
-		glUniform1f(ambientLightLoc, ambientLight);
-		glUniform1f(mirrorReflectLightLoc, mirrorReflectLight);
+		glUniform1f(ambientStrengthLoc, ambientStrength);
+		glUniform1f(specularStrengthLoc, specularStrength);
 		glUniform1f(diffLightLoc, diffLight);
 
 		// 计算投影矩阵
@@ -1050,14 +1201,14 @@ int main()
 
 
 		// 渲染光源正方体
-		//glUseProgram(0);
+		//glUseProgram(SimpleShaderProgram);
 		//启用深度测试
 		glDisable(GL_DEPTH_TEST);
 		//启用面剔除
 		glDisable(GL_CULL_FACE);
 		glm::mat4 model2 = glm::mat4(1.0f);
 		model2 = glm::translate(model2, lightPos);
-		model2 = glm::scale(model2, glm::vec3(0.06f)); // 缩放模型
+		model2 = glm::scale(model2, glm::vec3(0.05f)); // 缩放模型
 		;
 		glUniformMatrix4fv(glGetUniformLocation(shaderProgram, "model"), 1, GL_FALSE, glm::value_ptr(model2));
 		glUniform3f(glGetUniformLocation(shaderProgram, "objectColor"), 0.1f, 0.1f, 0.1f);
