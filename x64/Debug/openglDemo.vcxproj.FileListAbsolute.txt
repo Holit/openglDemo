@@ -1,2 +1,0 @@
-D:\Projects\ComputerGraphics\openglDemo\x64\Debug\openglDemo.exe
-E:\Projects\ComputerGraphics\openglDemo\x64\Debug\openglDemo.exe
